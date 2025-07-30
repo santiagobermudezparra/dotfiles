@@ -9,7 +9,7 @@ if command -v zsh >/dev/null; then
 fi
 
 if ! command -v chezmoi >/dev/null; then
-  sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:mischavandenburg/dotfiles-chezmoi.git
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:santiagobermudezparra/dotfiles.git
 fi
 
 if [ ! -d "$HOME/.zsh" ]; then
