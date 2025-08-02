@@ -130,6 +130,19 @@ autoload -Uz bracketed-paste-magic
 autoload -Uz zle
 zle -N bracketed-paste bracketed-paste-magic
 
+# Always start in insert mode (optional but helpful)
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+    zle vi-insert
+  fi
+}
+zle -N zle-keymap-select
+
+function zle-line-init {
+  zle vi-insert
+}
+zle -N zle-line-init
+
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
