@@ -37,12 +37,11 @@ export LANG="en_US.UTF-8"
 # Directories
 
 export REPOS="$HOME/Repos"
-export GITUSER="mischavandenburg"
+export GITUSER="santiagobermudezparra"
 export GHREPOS="$REPOS/github.com/$GITUSER"
 export DOTFILES="$HOME/.local/share/chezmoi"
 export SCRIPTS="$DOTFILES/scripts"
-export ICLOUD="$HOME/icloud"
-export ZETTELKASTEN="$HOME/Zettelkasten"
+
 
 # Go related. In general all executables and scripts go in .local/bin
 
@@ -125,6 +124,11 @@ prompt pure
 
 bindkey -v
 export KEYTIMEOUT=1 # make switching between modes faster
+
+# Fix paste issues in vi mode
+autoload -Uz bracketed-paste-magic
+autoload -Uz zle
+zle -N bracketed-paste bracketed-paste-magic
 
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -212,13 +216,7 @@ alias pc='pass show -c'
 
 alias ds='devpod ssh'
 
-# Bluetooth
 
-# Airpods Max
-alias btm='bluetoothctl connect 08:FF:44:0E:EA:D6'
-
-# Airpods
-alias bta='bluetoothctl connect 08:65:18:78:BD:A6'
 
 # ~~~~~~~~~~~~~~~ Completion ~~~~~~~~~~~~~~~~~~~~~~~~
 
