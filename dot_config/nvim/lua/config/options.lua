@@ -14,6 +14,26 @@ vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.scrolloff = 8
 
+
+
+-- Enable completion
+vim.opt.completeopt = "menu,menuone,noselect"
+
+-- Better completion experience
+vim.opt.pumheight = 10
+
+-- Enable mouse support
+vim.opt.mouse = "a"
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.smartcase = true
+
+-- Faster completion (4000ms default)
+vim.opt.updatetime = 250
+
+-- Always show the signcolumn, otherwise it would shift the text each time
+vim.opt.signcolumn = "yes"
+
 -- wrap / break
 
 -- opt.textwidth = 80
