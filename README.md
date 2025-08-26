@@ -37,3 +37,5 @@
 - `<C-w> l` → Move to right pane (editor)
 - `<C-w> j` → Move down
 - `<C-w> k` → Move up
+- `H` → Move between tabs
+- `<Space> + bd` → close current tab
