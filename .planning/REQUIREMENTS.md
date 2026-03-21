@@ -15,30 +15,25 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **AUDIT-04**: User can see a list of missing tools for their workflow with suggested additions
 - [ ] **AUDIT-05**: User can read concrete suggestions for improving this as a DevPod base image
 
-### Tooling
-
-- [ ] **TOOL-01**: User can provision a container with Python managed via mise
-- [ ] **TOOL-02**: User can provision a container with Claude Code CLI managed via mise
-
-### Setup
-
-- [ ] **SETUP-01**: User can run the setup script in a DevPod container without macOS/GUI errors
-
-## v2 Requirements
-
-Deferred to follow-up milestone.
-
 ### Cleanup
 
-- **CLEAN-01**: User can remove all flagged YouTuber-specific scripts
-- **CLEAN-02**: User can remove unused aliases and env vars from zshrc
-- **CLEAN-03**: User can remove Hyprland/Waybar configs (Linux WM not needed in containers)
+- [ ] **CLEAN-01**: User can remove all flagged YouTuber-specific scripts (based on audit)
+- [ ] **CLEAN-02**: User can remove unused aliases and env vars from zshrc (based on audit)
+- [ ] **CLEAN-03**: User can update setup script to work in DevPod containers without macOS/GUI errors
+
+### Ralph Integration
+
+- [ ] **RALPH-01**: User can run `ralph` from any project directory inside a DevPod container
+- [ ] **RALPH-02**: User can provision a container with Node and Claude Code CLI installed via setup script
+- [ ] **RALPH-03**: Claude Code auto-reads a global CLAUDE.md on every session start (mapped via chezmoi to ~/.claude/CLAUDE.md)
+- [ ] **RALPH-04**: CLAUDE.md is pre-populated with Ralph conventions so new projects need minimal setup
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Deleting any files | Audit-first milestone — deletions happen in v1.1 |
+| Python via mise in dotfiles base | Handled per-project via mise locals, not dotfiles-level |
+| Claude Code via mise in dotfiles base | Installed by setup.sh directly — mise is per-project |
 | Neovim plugin changes | Separate concern, not part of this cleanup |
 | Hyprland/Waybar config changes | Linux WM configs, not relevant to DevPod use case |
 
@@ -53,15 +48,19 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUDIT-03 | Phase 1 | Pending |
 | AUDIT-04 | Phase 1 | Pending |
 | AUDIT-05 | Phase 1 | Pending |
-| TOOL-01 | Phase 2 | Pending |
-| TOOL-02 | Phase 2 | Pending |
-| SETUP-01 | Phase 2 | Pending |
+| CLEAN-01 | Phase 2 | Pending |
+| CLEAN-02 | Phase 2 | Pending |
+| CLEAN-03 | Phase 2 | Pending |
+| RALPH-01 | Phase 3 | Pending |
+| RALPH-02 | Phase 3 | Pending |
+| RALPH-03 | Phase 3 | Pending |
+| RALPH-04 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 8 total
-- Mapped to phases: 8
+- v1 requirements: 12 total
+- Mapped to phases: 12
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-22*
-*Last updated: 2026-03-22 — Traceability confirmed after roadmap creation*
+*Last updated: 2026-03-22 — Restructured: dropped mise tooling, added Cleanup phase and Ralph Integration phase*

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Milestone v1.0 delivers two things in sequence: first, a comprehensive audit of the inherited dotfiles repo — classifying every script, flagging YouTuber-specific tools and personal paths, and surfacing concrete DevPod improvement suggestions — then, targeted tooling additions (Python and Claude Code CLI via mise) and a setup script fix for DevPod container compatibility. The audit informs everything that comes after.
+Milestone v1.0 delivers three phases in sequence: (1) a comprehensive audit of the inherited dotfiles repo — classifying every script, flagging YouTuber-specific tools and personal paths, and surfacing concrete DevPod improvement suggestions; (2) cleanup — removing flagged items and fixing the setup script for DevPod containers; (3) Ralph integration — adding the Ralph AI agent loop (ralph.sh, skills/, global CLAUDE.md) so any DevPod container is instantly ready for Claude Code + Ralph-driven development.
 
 ## Phases
 
@@ -13,7 +13,8 @@ Milestone v1.0 delivers two things in sequence: first, a comprehensive audit of 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Audit** - Read the full repo and produce AUDIT-REPORT.md classifying all scripts, tools, env vars, and aliases
-- [ ] **Phase 2: Tooling and Setup** - Add Python and Claude Code CLI via mise; fix setup script for DevPod container compatibility
+- [ ] **Phase 2: Cleanup** - Remove flagged YouTuber-specific scripts, aliases, and env vars; fix setup script for DevPod
+- [ ] **Phase 3: Ralph Integration** - Add ralph.sh, skills/, and global CLAUDE.md to dotfiles; setup.sh installs Node + Claude Code CLI
 
 ## Phase Details
 
@@ -29,22 +30,34 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. User can read concrete, actionable suggestions for improving the repo as a DevPod base image
 **Plans**: TBD
 
-### Phase 2: Tooling and Setup
-**Goal**: User can provision a DevPod container that includes Python and Claude Code CLI, and run the setup script without macOS/GUI errors
-**Depends on**: Phase 1
-**Requirements**: TOOL-01, TOOL-02, SETUP-01
+### Phase 2: Cleanup
+**Goal**: The dotfiles repo contains only files and config relevant to the user's actual workflow
+**Depends on**: Phase 1 (audit report must exist to guide deletions)
+**Requirements**: CLEAN-01, CLEAN-02, CLEAN-03
 **Success Criteria** (what must be TRUE):
-  1. User can provision a container and run `python --version` with a mise-managed Python installed
-  2. User can provision a container and run `claude --version` with Claude Code CLI installed via mise
-  3. User can run the setup script inside a DevPod container without it failing on macOS-only or GUI-dependent steps
+  1. All scripts flagged as "remove" in AUDIT-REPORT.md are deleted
+  2. All aliases and env vars flagged as personal/unused are removed from zshrc
+  3. Setup script runs inside a DevPod container without failing on macOS/GUI-only steps
+**Plans**: TBD
+
+### Phase 3: Ralph Integration
+**Goal**: Any DevPod container provisioned from these dotfiles is instantly ready for Claude Code + Ralph-driven development
+**Depends on**: Phase 2 (clean base before adding new structure)
+**Requirements**: RALPH-01, RALPH-02, RALPH-03, RALPH-04
+**Success Criteria** (what must be TRUE):
+  1. User can run `ralph` from any project directory inside a DevPod container
+  2. User can provision a container and run `node --version` and `claude --version` without additional setup
+  3. Claude Code auto-reads ~/.claude/CLAUDE.md on session start (chezmoi maps dot_claude/CLAUDE.md)
+  4. CLAUDE.md contains Ralph conventions so new projects need only swap project-specific details
 **Plans**: TBD
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2
+Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Audit | 0/TBD | Not started | - |
-| 2. Tooling and Setup | 0/TBD | Not started | - |
+| 2. Cleanup | 0/TBD | Not started | - |
+| 3. Ralph Integration | 0/TBD | Not started | - |
