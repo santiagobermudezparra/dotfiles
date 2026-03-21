@@ -28,7 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can see all env vars and aliases in zshrc that reference non-existent or personal paths ($ICLOUD, $ZETTELKASTEN, $LAB, etc.)
   4. User can read a list of workflow tools not currently present with concrete suggestions for adding them
   5. User can read concrete, actionable suggestions for improving the repo as a DevPod base image
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Read all repo files and write AUDIT-REPORT.md with all 5 sections
 
 ### Phase 2: Cleanup
 **Goal**: The dotfiles repo contains only files and config relevant to the user's actual workflow
@@ -58,6 +61,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Audit | 0/TBD | Not started | - |
+| 1. Audit | 0/1 | Planning complete | - |
 | 2. Cleanup | 0/TBD | Not started | - |
 | 3. Ralph Integration | 0/TBD | Not started | - |
