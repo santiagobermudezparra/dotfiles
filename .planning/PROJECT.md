@@ -32,9 +32,9 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 <!-- Current scope. Building toward these. -->
 
-- [ ] CLEAN-01: Remove all flagged YouTuber-specific scripts (25 scripts)
-- [ ] CLEAN-02: Remove unused aliases and env vars from zshrc
-- [ ] CLEAN-03: Update setup script to work in DevPod containers without macOS/GUI errors
+- ✓ CLEAN-01: 29 YouTuber-specific scripts removed (18 remain) — Phase 2
+- ✓ CLEAN-02: Dead aliases (icloud, cdblog, 0, zo, lab, in, cdzk, sub, pc) and undefined vars removed from zshrc — Phase 2
+- ✓ CLEAN-03: setup script guarded with container detection — safe in DevPod/Codespaces — Phase 2
 - [ ] RALPH-01: Run `ralph` from any project directory inside a DevPod container
 - [ ] RALPH-02: Container has Node and Claude Code CLI installed via mise
 - [ ] RALPH-03: Claude Code auto-reads global CLAUDE.md (~/.claude/CLAUDE.md via chezmoi)
@@ -44,7 +44,7 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 <!-- Explicit boundaries. -->
 
-- Deleting any files — audit-first, delete in a follow-up milestone
+- Deleting any files without auditing first — done: audit + cleanup complete
 - Hyprland/Waybar config changes — Linux WM configs, not relevant to DevPod
 - Neovim plugin changes — separate concern
 
@@ -90,4 +90,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 — after Phase 1 (Audit) complete*
+*Last updated: 2026-03-22 — after Phase 2 (Cleanup) complete*
