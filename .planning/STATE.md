@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-cleanup/02-02-PLAN.md
-last_updated: "2026-03-21T22:20:30.753Z"
+stopped_at: Completed 03-ralph-integration/03-02-PLAN.md
+last_updated: "2026-03-21T23:04:10.592Z"
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-22)
 
 **Core value:** A clean, portable dotfiles base that provisions DevPod containers with exactly what's needed — no more, no less.
-**Current focus:** Phase 02 — cleanup
+**Current focus:** Phase 03 — ralph-integration
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
+Phase: 03 (ralph-integration) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: Not started
 | Phase 01-audit P01 | 20 | 2 tasks | 1 files |
 | Phase 02-cleanup P01 | 1 | 2 tasks | 30 files |
 | Phase 02-cleanup P02 | 2 | 1 tasks | 1 files |
+| Phase 03-ralph-integration P02 | 5 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 02-cleanup]: Container guard in setup reuses REMOTE_CONTAINERS/CODESPACES/DEVCONTAINER_TYPE pattern from dot_zshrc
 - [Phase 02-cleanup]: Removed Vivaldi browser detection block entirely — BROWSER env var irrelevant in headless containers
 - [Phase 02-cleanup]: Kept cdgo and syu (Review status) in dot_zshrc — user to evaluate whether to keep
+- [Phase 03-ralph-integration]: Use native claude.ai installer (not npm) — npm path deprecated early 2026; native installer self-contained and auto-updating
+- [Phase 03-ralph-integration]: cd /tmp before native installer — prevents container filesystem scan hang when running from root directory
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T22:17:42.545Z
-Stopped at: Completed 02-cleanup/02-02-PLAN.md
+Last session: 2026-03-21T23:04:10.588Z
+Stopped at: Completed 03-ralph-integration/03-02-PLAN.md
 Resume file: None
