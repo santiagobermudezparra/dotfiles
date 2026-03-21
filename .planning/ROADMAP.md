@@ -41,7 +41,11 @@ Plans:
   1. All scripts flagged as "remove" in AUDIT-REPORT.md are deleted
   2. All aliases and env vars flagged as personal/unused are removed from zshrc
   3. Setup script runs inside a DevPod container without failing on macOS/GUI-only steps
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Delete 29 Remove scripts and guard sudo chsh in setup for containers
+- [ ] 02-02-PLAN.md — Remove dead aliases, env vars, and section headers from dot_zshrc
 
 ### Phase 3: Ralph Integration
 **Goal**: Any DevPod container provisioned from these dotfiles is instantly ready for Claude Code + Ralph-driven development
@@ -62,5 +66,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Audit | 1/1 | Complete    | 2026-03-21 |
-| 2. Cleanup | 0/TBD | Not started | - |
+| 2. Cleanup | 0/2 | In progress | - |
 | 3. Ralph Integration | 0/TBD | Not started | - |
