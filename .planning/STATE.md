@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-ralph-integration/03-02-PLAN.md
-last_updated: "2026-03-21T23:04:10.592Z"
+stopped_at: Completed 03-ralph-integration/03-01-PLAN.md
+last_updated: "2026-03-21T23:05:04.841Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -50,6 +50,7 @@ Plan: 2 of 2
 | Phase 02-cleanup P01 | 1 | 2 tasks | 30 files |
 | Phase 02-cleanup P02 | 2 | 1 tasks | 1 files |
 | Phase 03-ralph-integration P02 | 5 | 1 tasks | 1 files |
+| Phase 03 P01 | 5 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 02-cleanup]: Kept cdgo and syu (Review status) in dot_zshrc — user to evaluate whether to keep
 - [Phase 03-ralph-integration]: Use native claude.ai installer (not npm) — npm path deprecated early 2026; native installer self-contained and auto-updating
 - [Phase 03-ralph-integration]: cd /tmp before native installer — prevents container filesystem scan hang when running from root directory
+- [Phase 03-ralph-integration]: Fetched ralph.sh from snarktank/ralph main branch — authoritative source, preserves all features
+- [Phase 03-ralph-integration]: Skills placed at dot_claude/skills/ to map to ~/.claude/skills/ — global scope across all containers
 
 ### Pending Todos
 
@@ -82,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T23:04:10.588Z
-Stopped at: Completed 03-ralph-integration/03-02-PLAN.md
+Last session: 2026-03-21T23:05:04.835Z
+Stopped at: Completed 03-ralph-integration/03-01-PLAN.md
 Resume file: None

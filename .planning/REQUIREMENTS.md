@@ -23,10 +23,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Ralph Integration
 
-- [ ] **RALPH-01**: User can run `ralph` from any project directory inside a DevPod container
+- [x] **RALPH-01**: User can run `ralph` from any project directory inside a DevPod container
 - [x] **RALPH-02**: User can provision a container with Node and Claude Code CLI installed via setup script
-- [ ] **RALPH-03**: Claude Code auto-reads a global CLAUDE.md on every session start (mapped via chezmoi to ~/.claude/CLAUDE.md)
-- [ ] **RALPH-04**: CLAUDE.md is pre-populated with Ralph conventions so new projects need minimal setup
+- [x] **RALPH-03**: Claude Code auto-reads a global CLAUDE.md on every session start (mapped via chezmoi to ~/.claude/CLAUDE.md)
+- [x] **RALPH-04**: CLAUDE.md is pre-populated with Ralph conventions so new projects need minimal setup
 
 ## Out of Scope
 
@@ -51,10 +51,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CLEAN-01 | Phase 2 | Complete |
 | CLEAN-02 | Phase 2 | Complete |
 | CLEAN-03 | Phase 2 | Complete |
-| RALPH-01 | Phase 3 | Pending |
+| RALPH-01 | Phase 3 | Complete |
 | RALPH-02 | Phase 3 | Complete |
-| RALPH-03 | Phase 3 | Pending |
-| RALPH-04 | Phase 3 | Pending |
+| RALPH-03 | Phase 3 | Complete |
+| RALPH-04 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 12 total

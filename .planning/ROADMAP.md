@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Audit** - Read the full repo and produce AUDIT-REPORT.md classifying all scripts, tools, env vars, and aliases (completed 2026-03-21)
 - [x] **Phase 2: Cleanup** - Remove flagged YouTuber-specific scripts, aliases, and env vars; fix setup script for DevPod (completed 2026-03-21)
-- [ ] **Phase 3: Ralph Integration** - Add ralph.sh, skills/, and global CLAUDE.md to dotfiles; setup.sh installs Node + Claude Code CLI
+- [x] **Phase 3: Ralph Integration** - Add ralph.sh, skills/, and global CLAUDE.md to dotfiles; setup.sh installs Node + Claude Code CLI (completed 2026-03-21)
 
 ## Phase Details
 
@@ -56,10 +56,10 @@ Plans:
   2. User can provision a container and run `node --version` and `claude --version` without additional setup
   3. Claude Code auto-reads ~/.claude/CLAUDE.md on session start (chezmoi maps dot_claude/CLAUDE.md)
   4. CLAUDE.md contains Ralph conventions so new projects need only swap project-specific details
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 03-01-PLAN.md — Add ralph script, global CLAUDE.md, and skills to dotfiles; remove wrong-path dot_config/claude/CLAUDE.md
+- [x] 03-01-PLAN.md — Add ralph script, global CLAUDE.md, and skills to dotfiles; remove wrong-path dot_config/claude/CLAUDE.md
 - [x] 03-02-PLAN.md — Update setup script to install Claude Code CLI and jq
 
 ## Progress
@@ -71,4 +71,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Audit | 1/1 | Complete    | 2026-03-21 |
 | 2. Cleanup | 2/2 | Complete    | 2026-03-21 |
-| 3. Ralph Integration | 1/2 | In Progress|  |
+| 3. Ralph Integration | 2/2 | Complete   | 2026-03-21 |
