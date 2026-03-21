@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Audit
 
-- [ ] **AUDIT-01**: User can read a report classifying every script as generic, YouTuber-specific, or remove candidate
-- [ ] **AUDIT-02**: User can see all YouTuber-specific tools flagged across all configs (newsboat, pomo, brightnessctl, osascript, etc.)
-- [ ] **AUDIT-03**: User can see all env vars and aliases in zshrc that reference non-existent or personal paths ($ICLOUD, $ZETTELKASTEN, $LAB, etc.)
-- [ ] **AUDIT-04**: User can see a list of missing tools for their workflow with suggested additions
-- [ ] **AUDIT-05**: User can read concrete suggestions for improving this as a DevPod base image
+- [x] **AUDIT-01**: User can read a report classifying every script as generic, YouTuber-specific, or remove candidate
+- [x] **AUDIT-02**: User can see all YouTuber-specific tools flagged across all configs (newsboat, pomo, brightnessctl, osascript, etc.)
+- [x] **AUDIT-03**: User can see all env vars and aliases in zshrc that reference non-existent or personal paths ($ICLOUD, $ZETTELKASTEN, $LAB, etc.)
+- [x] **AUDIT-04**: User can see a list of missing tools for their workflow with suggested additions
+- [x] **AUDIT-05**: User can read concrete suggestions for improving this as a DevPod base image
 
 ### Cleanup
 
@@ -43,11 +43,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIT-01 | Phase 1 | Pending |
-| AUDIT-02 | Phase 1 | Pending |
-| AUDIT-03 | Phase 1 | Pending |
-| AUDIT-04 | Phase 1 | Pending |
-| AUDIT-05 | Phase 1 | Pending |
+| AUDIT-01 | Phase 1 | Complete |
+| AUDIT-02 | Phase 1 | Complete |
+| AUDIT-03 | Phase 1 | Complete |
+| AUDIT-04 | Phase 1 | Complete |
+| AUDIT-05 | Phase 1 | Complete |
 | CLEAN-01 | Phase 2 | Pending |
 | CLEAN-02 | Phase 2 | Pending |
 | CLEAN-03 | Phase 2 | Pending |
