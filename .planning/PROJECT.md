@@ -14,7 +14,6 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 **Target features:**
 - Comprehensive audit report across scripts, configs, aliases, and env vars
-- Python and Claude Code CLI added via mise
 - Setup script updated for DevPod container compatibility
 
 ## Requirements
@@ -34,8 +33,6 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 - [ ] AUDIT-03: Flag env vars and aliases in zshrc that reference non-existent or personal paths ($ICLOUD, $ZETTELKASTEN, $LAB, etc.)
 - [ ] AUDIT-04: Identify missing tools for your workflow and suggest additions
 - [ ] AUDIT-05: Suggest improvements to make this a better DevPod base image
-- [ ] TOOL-01: Add python = "latest" to mise config
-- [ ] TOOL-02: Add Claude Code CLI to mise config
 - [ ] SETUP-01: Update setup script to work cleanly in a DevPod container
 
 ### Out of Scope
