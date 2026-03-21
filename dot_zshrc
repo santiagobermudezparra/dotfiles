@@ -28,10 +28,6 @@ if command -v nvim > /dev/null ; then
 fi
 
 
-if command -v vivaldi > /dev/null ; then
-  export BROWSER="vivaldi"
-fi
-
 export LANG="en_US.UTF-8"
 
 # Directories
@@ -135,9 +131,7 @@ if command -v bat > /dev/null ; then
 fi
 
 alias scripts='cd $SCRIPTS'
-alias cdblog="cd ~/websites/blog"
 alias c="clear"
-alias icloud="cd \$ICLOUD"
 
 if command -v lsd > /dev/null ; then
   alias ls="lsd"
@@ -147,15 +141,8 @@ if command -v lsd > /dev/null ; then
   alias lt='ls --tree'
 fi
 
-
-# 0
-
-alias 0='cd $HOME/0'
-alias zo='eval "$($SCRIPTS/0-cd)"'
-
 # Repos
 
-alias lab='cd $LAB'
 alias dot='cd $HOME/.local/share/chezmoi'
 alias repos='cd $REPOS'
 alias ghrepos='cd $GHREPOS'
@@ -175,22 +162,11 @@ alias e='exit'
 
 alias syu='sudo pacman -Syu'
 
-# Azure
-
-alias sub='az account set -s'
-
 # Git
 
 alias gp='git pull'
 alias gs='git status'
 alias lg='lazygit'
-
-
-# Zettelkasten
-
-alias in="cd \$ZETTELKASTEN/0\ Inbox/"
-alias cdzk="cd \$ZETTELKASTEN"
-
 
 # Kubernetes
 
@@ -202,14 +178,9 @@ alias kn='kubens'
 
 alias fgk='flux get kustomizations'
 
-# Pass
-
-alias pc='pass show -c'
-
 # Devpod
 
 alias ds='devpod ssh'
-
 
 
 # ~~~~~~~~~~~~~~~ Completion ~~~~~~~~~~~~~~~~~~~~~~~~
