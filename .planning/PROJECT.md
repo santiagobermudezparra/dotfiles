@@ -35,10 +35,10 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 - ✓ CLEAN-01: 29 YouTuber-specific scripts removed (18 remain) — Phase 2
 - ✓ CLEAN-02: Dead aliases (icloud, cdblog, 0, zo, lab, in, cdzk, sub, pc) and undefined vars removed from zshrc — Phase 2
 - ✓ CLEAN-03: setup script guarded with container detection — safe in DevPod/Codespaces — Phase 2
-- [ ] RALPH-01: Run `ralph` from any project directory inside a DevPod container
-- [ ] RALPH-02: Container has Node and Claude Code CLI installed via mise
-- [ ] RALPH-03: Claude Code auto-reads global CLAUDE.md (~/.claude/CLAUDE.md via chezmoi)
-- [ ] RALPH-04: CLAUDE.md pre-populated with Ralph conventions
+- ✓ RALPH-01: `scripts/ralph` on PATH — runs from any project directory — Phase 3
+- ✓ RALPH-02: setup installs Claude Code CLI (native installer + /tmp guard) + jq — Phase 3
+- ✓ RALPH-03: `dot_claude/CLAUDE.md` → `~/.claude/CLAUDE.md` via chezmoi — auto-read by Claude Code — Phase 3
+- ✓ RALPH-04: CLAUDE.md has 9-step Ralph workflow, quality gates, stop condition — Phase 3
 
 ### Out of Scope
 
@@ -50,27 +50,27 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 ## Context
 
-- Managed with chezmoi; files prefixed with `dot_` map to `~/.config/...`
+- Managed with chezmoi; files prefixed with `dot_` map to their target locations on apply
 - Primary use: DevPod containers for development (K8s homelab, general dev)
 - Secondary use: local macOS dev machine
-- Inherited from a YouTuber's config — many scripts and aliases reference tools/workflows that don't apply
-- mise is the tool version manager (already has node, neovim, ripgrep, lsd, bat, fzf, fd)
-- zshrc already has DevPod container detection logic (`$REMOTE_CONTAINERS`, `$DEVCONTAINER_TYPE`)
-- ~40 scripts in the scripts/ folder, many of unknown purpose
+- Cleaned from YouTuber's config — 29 scripts removed, dead aliases purged, 18 generic scripts remain
+- mise manages: node, neovim, ripgrep, lsd, bat, fzf, fd, chezmoi, usage
+- setup.sh installs: Claude Code CLI (native installer), jq — DevPod-safe with container guards
+- Ralph AI loop: `scripts/ralph` on PATH, `dot_claude/CLAUDE.md` auto-read by Claude Code, skills at `dot_claude/skills/`
 
 ## Constraints
 
-- **Scope**: Audit only — no deletions this milestone
-- **Tool manager**: mise (not homebrew) for adding new tools
-- **Container-first**: all changes must work in a DevPod/Linux container context
+- **Tool manager**: mise for dev tools; setup.sh for system-level installs (Claude Code CLI, jq)
+- **Container-first**: all changes work in a DevPod/Linux container context
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Claude Code CLI + tools via mise | Consistent with existing tool management pattern; Node already in mise | — Pending |
-| Audit before delete | Don't lose anything until we understand what it does | ✓ Good — audit complete, 25 scripts to remove |
+| Claude Code CLI via native installer in setup.sh | npm install deprecated as of early 2026; binary lands at ~/.local/bin already on PATH | ✓ Good |
+| Audit before delete | Don't lose anything until we understand what it does | ✓ Good — audit complete, 29 scripts removed |
 | Node stays in mise (not setup.sh) | User confirmed mise-first approach; no conflict with Phase 3 | ✓ Good |
+| Ralph files fetched from snarktank/ralph source | Keeps upstream behavior; skills and loop script match official implementation | ✓ Good |
 
 ## Evolution
 
@@ -90,4 +90,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 — after Phase 2 (Cleanup) complete*
+*Last updated: 2026-03-22 — Milestone v1.0 complete (all 3 phases)*
