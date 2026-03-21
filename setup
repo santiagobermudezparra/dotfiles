@@ -29,4 +29,15 @@ if command -v alacritty >/dev/null; then
   git clone https://github.com/alacritty/alacritty-theme "$XDG_CONFIG_HOME"/alacritty/themes
 fi
 
+# jq — required by ralph agent loop for parsing prd.json
+if ! command -v jq >/dev/null; then
+  apt-get install -y jq 2>/dev/null || brew install jq 2>/dev/null || echo "WARNING: jq not installed — ralph requires jq"
+fi
+
+# Claude Code CLI — native installer places binary at ~/.local/bin/claude
+# Must cd to /tmp first to prevent filesystem scan hang in containers
+if ! command -v claude >/dev/null; then
+  cd /tmp && curl -fsSL https://claude.ai/install.sh | bash
+fi
+
 exit 0
