@@ -56,7 +56,11 @@ Plans:
   2. User can provision a container and run `node --version` and `claude --version` without additional setup
   3. Claude Code auto-reads ~/.claude/CLAUDE.md on session start (chezmoi maps dot_claude/CLAUDE.md)
   4. CLAUDE.md contains Ralph conventions so new projects need only swap project-specific details
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Add ralph script, global CLAUDE.md, and skills to dotfiles; remove wrong-path dot_config/claude/CLAUDE.md
+- [ ] 03-02-PLAN.md — Update setup script to install Claude Code CLI and jq
 
 ## Progress
 
@@ -67,4 +71,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Audit | 1/1 | Complete    | 2026-03-21 |
 | 2. Cleanup | 2/2 | Complete    | 2026-03-21 |
-| 3. Ralph Integration | 0/TBD | Not started | - |
+| 3. Ralph Integration | 0/2 | Not started | - |
