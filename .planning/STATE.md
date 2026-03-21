@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-audit/01-01-PLAN.md
-last_updated: "2026-03-21T22:01:01.872Z"
+stopped_at: Completed 02-cleanup/02-02-PLAN.md
+last_updated: "2026-03-21T22:17:42.548Z"
 progress:
   total_phases: 3
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-22)
 
 **Core value:** A clean, portable dotfiles base that provisions DevPod containers with exactly what's needed — no more, no less.
-**Current focus:** Phase 01 — audit
+**Current focus:** Phase 02 — cleanup
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: 02 (cleanup) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -47,6 +47,8 @@ Plan: Not started
 
 *Updated after each plan completion*
 | Phase 01-audit P01 | 20 | 2 tasks | 1 files |
+| Phase 02-cleanup P01 | 1 | 2 tasks | 30 files |
+| Phase 02-cleanup P02 | 2 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -62,6 +64,10 @@ Recent decisions affecting current work:
 - [Phase 01-audit]: 0-cd and duck classified Remove: Zettelkasten ~/0 pattern and w3m browser not user's workflow
 - [Phase 01-audit]: Node stays in mise/config.toml: no conflict, Phase 3 handles Claude Code CLI via mise
 - [Phase 01-audit]: center classified Keep: user wants tmux, script is a generic layout helper
+- [Phase 02-cleanup]: Deleted 29 Remove-classified scripts (AUDIT-REPORT table has 29 Remove rows despite summary line saying 25 — table is authoritative)
+- [Phase 02-cleanup]: Container guard in setup reuses REMOTE_CONTAINERS/CODESPACES/DEVCONTAINER_TYPE pattern from dot_zshrc
+- [Phase 02-cleanup]: Removed Vivaldi browser detection block entirely — BROWSER env var irrelevant in headless containers
+- [Phase 02-cleanup]: Kept cdgo and syu (Review status) in dot_zshrc — user to evaluate whether to keep
 
 ### Pending Todos
 
@@ -73,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T21:57:36.940Z
-Stopped at: Completed 01-audit/01-01-PLAN.md
+Last session: 2026-03-21T22:17:42.545Z
+Stopped at: Completed 02-cleanup/02-02-PLAN.md
 Resume file: None

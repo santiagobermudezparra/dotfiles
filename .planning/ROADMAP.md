@@ -44,8 +44,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Delete 29 Remove scripts and guard sudo chsh in setup for containers
-- [ ] 02-02-PLAN.md — Remove dead aliases, env vars, and section headers from dot_zshrc
+- [x] 02-01-PLAN.md — Delete 29 Remove scripts and guard sudo chsh in setup for containers
+- [x] 02-02-PLAN.md — Remove dead aliases, env vars, and section headers from dot_zshrc
 
 ### Phase 3: Ralph Integration
 **Goal**: Any DevPod container provisioned from these dotfiles is instantly ready for Claude Code + Ralph-driven development
