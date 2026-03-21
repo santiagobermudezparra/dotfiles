@@ -22,18 +22,23 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 <!-- Shipped and confirmed valuable. -->
 
-(None yet — ship to validate)
+- ✓ AUDIT-01: Report classifying every script (18 Keep / 25 Remove / 3 Review) — Phase 1
+- ✓ AUDIT-02: YouTuber-specific tools flagged across all configs (17 entries) — Phase 1
+- ✓ AUDIT-03: Env vars and aliases referencing undefined paths flagged ($ICLOUD, $ZETTELKASTEN, $LAB) — Phase 1
+- ✓ AUDIT-04: Missing tools listed with install methods (gh, lazygit, direnv, delta, Claude Code CLI) — Phase 1
+- ✓ AUDIT-05: 9 concrete DevPod improvement suggestions documented — Phase 1
 
 ### Active
 
 <!-- Current scope. Building toward these. -->
 
-- [ ] AUDIT-01: Produce a report classifying every script (generic/YouTuber-specific/remove candidate)
-- [ ] AUDIT-02: Flag YouTuber-specific tools referenced across all configs (newsboat, pomo, brightnessctl, osascript, etc.)
-- [ ] AUDIT-03: Flag env vars and aliases in zshrc that reference non-existent or personal paths ($ICLOUD, $ZETTELKASTEN, $LAB, etc.)
-- [ ] AUDIT-04: Identify missing tools for your workflow and suggest additions
-- [ ] AUDIT-05: Suggest improvements to make this a better DevPod base image
-- [ ] SETUP-01: Update setup script to work cleanly in a DevPod container
+- [ ] CLEAN-01: Remove all flagged YouTuber-specific scripts (25 scripts)
+- [ ] CLEAN-02: Remove unused aliases and env vars from zshrc
+- [ ] CLEAN-03: Update setup script to work in DevPod containers without macOS/GUI errors
+- [ ] RALPH-01: Run `ralph` from any project directory inside a DevPod container
+- [ ] RALPH-02: Container has Node and Claude Code CLI installed via mise
+- [ ] RALPH-03: Claude Code auto-reads global CLAUDE.md (~/.claude/CLAUDE.md via chezmoi)
+- [ ] RALPH-04: CLAUDE.md pre-populated with Ralph conventions
 
 ### Out of Scope
 
@@ -63,8 +68,9 @@ A clean, portable dotfiles base that provisions DevPod containers with exactly w
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Python + Claude Code CLI via mise | Consistent with existing tool management pattern | — Pending |
-| Audit before delete | Don't lose anything until we understand what it does | — Pending |
+| Claude Code CLI + tools via mise | Consistent with existing tool management pattern; Node already in mise | — Pending |
+| Audit before delete | Don't lose anything until we understand what it does | ✓ Good — audit complete, 25 scripts to remove |
+| Node stays in mise (not setup.sh) | User confirmed mise-first approach; no conflict with Phase 3 | ✓ Good |
 
 ## Evolution
 
@@ -84,4 +90,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 — Milestone v1.0 started*
+*Last updated: 2026-03-22 — after Phase 1 (Audit) complete*
