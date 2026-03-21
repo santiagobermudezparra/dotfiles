@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Cleanup
 
 - [x] **CLEAN-01**: User can remove all flagged YouTuber-specific scripts (based on audit)
-- [ ] **CLEAN-02**: User can remove unused aliases and env vars from zshrc (based on audit)
+- [x] **CLEAN-02**: User can remove unused aliases and env vars from zshrc (based on audit)
 - [x] **CLEAN-03**: User can update setup script to work in DevPod containers without macOS/GUI errors
 
 ### Ralph Integration
@@ -49,7 +49,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUDIT-04 | Phase 1 | Complete |
 | AUDIT-05 | Phase 1 | Complete |
 | CLEAN-01 | Phase 2 | Complete |
-| CLEAN-02 | Phase 2 | Pending |
+| CLEAN-02 | Phase 2 | Complete |
 | CLEAN-03 | Phase 2 | Complete |
 | RALPH-01 | Phase 3 | Pending |
 | RALPH-02 | Phase 3 | Pending |

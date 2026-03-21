@@ -13,7 +13,7 @@ Milestone v1.0 delivers three phases in sequence: (1) a comprehensive audit of t
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Audit** - Read the full repo and produce AUDIT-REPORT.md classifying all scripts, tools, env vars, and aliases (completed 2026-03-21)
-- [ ] **Phase 2: Cleanup** - Remove flagged YouTuber-specific scripts, aliases, and env vars; fix setup script for DevPod
+- [x] **Phase 2: Cleanup** - Remove flagged YouTuber-specific scripts, aliases, and env vars; fix setup script for DevPod (completed 2026-03-21)
 - [ ] **Phase 3: Ralph Integration** - Add ralph.sh, skills/, and global CLAUDE.md to dotfiles; setup.sh installs Node + Claude Code CLI
 
 ## Phase Details
@@ -41,7 +41,7 @@ Plans:
   1. All scripts flagged as "remove" in AUDIT-REPORT.md are deleted
   2. All aliases and env vars flagged as personal/unused are removed from zshrc
   3. Setup script runs inside a DevPod container without failing on macOS/GUI-only steps
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — Delete 29 Remove scripts and guard sudo chsh in setup for containers
@@ -66,5 +66,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Audit | 1/1 | Complete    | 2026-03-21 |
-| 2. Cleanup | 0/2 | In progress | - |
+| 2. Cleanup | 2/2 | Complete   | 2026-03-21 |
 | 3. Ralph Integration | 0/TBD | Not started | - |
