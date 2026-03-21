@@ -10,26 +10,26 @@ All 46 scripts in `scripts/` classified per the rules in CONTEXT.md (D-04 throug
 
 | Name | Classification | Reason | Notes |
 |------|----------------|--------|-------|
-| 0-cd | Keep | Generic fzf-based directory navigator, outputs `cd` command for eval — no personal paths | Used by `zo` alias in zshrc |
+| 0-cd | Remove | Part of rwxrob Zettelkasten pattern (`~/0` directory) — not the user's workflow | `zo` alias in zshrc also Remove |
 | backup | Remove | Uses `/data-hdd/backups/arch-beast` — Mischa's server path; also backs up `/home/santiagobermudezparra` with a hardcoded username | Partial personalization but still tied to Mischa's server |
 | backup-weekly | Remove | Hardcoded `/data-hdd/backups/arch-beast/weekly` and `/home/mischa` — definitively Mischa's setup | — |
 | big | Remove | Resizes alacritty font for recording (`size = 38`) — YouTuber recording workflow; shows Keycastr checklist | References `$DOTFILES/alacritty.toml` via gsed |
 | bulkappend | Remove | Hardcoded Azure cluster names (`AKS20VIRTUELETREIN02100-TA`, `RG20VIRTUELETREIN02BASE200-STAGING`) — Mischa's client work | Dangerous: appends to every file in CWD |
 | bulkreplace | Keep | Generic recursive sed wrapper for find-and-replace across file types; comments show multiple usage patterns | Hardcoded example strings are just placeholders, edit before use |
 | cantsleep | Remove | `sudo brightnessctl s 5%` — Linux desktop brightness tool, not available in containers (D-06) | Single-line script |
-| center | Review | Generic tmux pane layout helper (splits right, resizes to 130 cols, clears) — no personal paths | Useful for any tmux workflow, not just YouTuber's |
+| center | Keep | Generic tmux pane layout helper (splits right, resizes to 130 cols, clears) — user wants to keep tmux | No personal paths; useful for any tmux workflow |
 | curr | Keep | Shows current kubectl context and namespace — directly useful for K8s homelab work (D-10) | Requires kubectl |
 | day_bash | Remove | Opens daily note at `$ZETTELKASTEN/periodic-notes/` — `$ZETTELKASTEN` is undefined (D-06/D-11) | Also uses NoNeckPain nvim plugin |
 | delrg | Remove | Deletes all Azure resource groups in a subscription via `az` CLI — Mischa's client work; dangerous | Do not keep — high risk of accidental data loss |
 | dnd | Remove | Toggles macOS Do Not Disturb via `osascript` — macOS-only (D-06) | Called by focusstart/focusstop |
 | dndstatus | Remove | Reads macOS Focus status via `defaults read com.apple.controlcenter` — macOS-only (D-06) | Called by focusstart/focusstop |
-| duck | Review | DuckDuckGo search via `w3m` terminal browser — generic concept but requires `w3m` | `w3m` not in mise; useful if you use terminal browsers |
+| duck | Remove | DuckDuckGo search via `w3m` terminal browser — `w3m` not in mise and not the user's workflow | — |
 | focusstart | Remove | Calls `pomo start` and `dnd` — both YouTuber/macOS tools (D-06/D-09) | — |
 | focusstop | Remove | Calls `pomo stop` and `dnd` — both YouTuber/macOS tools (D-06/D-09) | — |
 | gendate | Keep | Generates YYYY-MM-DD date string, optionally as a markdown heading — pure bash, no deps (D-07) | Generic and useful |
 | goentr | Keep | `entr`-based Go hot-reload runner (`go run .`) — generic dev utility (D-07) | Requires `entr` (not in mise) and Go |
 | goentrtest | Keep | `entr`-based Go test watcher (`go test`) — generic dev utility (D-07) | Requires `entr` (not in mise) and Go |
-| google | Review | Google search via `w3m` terminal browser — generic concept but requires `w3m` | Same caveat as `duck`; pair together |
+| google | Review | Google search via `w3m` terminal browser — `w3m` not in mise; decide if you use terminal browsers | Remove if you don't use w3m workflows |
 | hellobash | Remove | `echo "Hello from Bash"` — tutorial/demo leftover with no practical value | Safe to delete immediately |
 | iterator | Remove | Hardcoded list `("Car" "Monastic" "Muziek")` — bash tutorial/learning example, no value | Safe to delete immediately |
 | jqedit | Keep | In-place JSON editing with jq — useful generic utility (D-07) | The hardcoded query is a template/example; the script pattern itself is reusable |
@@ -58,7 +58,7 @@ All 46 scripts in `scripts/` classified per the rules in CONTEXT.md (D-04 throug
 | welcome | Keep | Greeting screen with date, cal, uptime — harmless, generic (D-07) | From TJDevries's config |
 | ytr | Remove | Gets YouTube transcript via `fabric` and copies to clipboard via `wl-copy` (Wayland) — desktop Linux only | Both `fabric` and `wl-copy` are desktop Linux tools, not available in containers |
 
-**Summary: Keep 18 | Remove 23 | Review 5**
+**Summary: Keep 18 | Remove 25 | Review 3**
 
 ---
 
@@ -78,7 +78,7 @@ Tools tied to Mischa van den Burg's personal workflow, found across ALL config f
 | wl-copy | scripts/ytr | Remove | Wayland clipboard utility — Linux desktop only |
 | figlet | scripts/startbreak | Remove | ASCII art banner generator — used for Pomodoro break display |
 | gsed | scripts/big, scripts/small, scripts/multiedit, scripts/ticket, scripts/shorts | Review | GNU sed wrapper (macOS needs gsed; Linux has sed). Used in some Remove scripts. `big`/`small` are YouTuber-specific; check if needed for Linux usage in kept scripts |
-| w3m | scripts/duck, scripts/google | Review | Terminal web browser — not in mise; needed only if keeping duck/google scripts |
+| w3m | scripts/duck (Remove), scripts/google (Review) | Review | Terminal web browser — not in mise; needed only if keeping `google` script |
 | az (Azure CLI) | dot_zshrc (`alias sub='az account set -s'`), scripts/delrg, scripts/bulkappend | Remove | Mischa's client Azure CLI work; dangerous scripts |
 | entr | scripts/goentr, scripts/goentrtest | Keep | File watcher for hot-reload — useful dev tool; these scripts are Keep (D-10 rationale applies to generic tools too) |
 | lazygit | dot_zshrc (`alias lg='lazygit'`) | Keep | TUI Git client — user explicitly wants this (D-15); alias exists, binary missing from mise |
@@ -114,8 +114,8 @@ All environment variables and aliases from `dot_zshrc`, classified per D-11 thro
 | `c=clear` | Alias | Keep | Generic |
 | `icloud=cd $ICLOUD` | Alias | Remove | `$ICLOUD` undefined — silently fails |
 | `ls/ll/la/lla/lt` (lsd) | Alias | Keep | Conditional on lsd; generic enhancement |
-| `0=cd $HOME/0` | Alias | Review | `~/0` purpose unclear — rwxrob/Zettelkasten pattern; decide if you use a `~/0` entry point |
-| `zo=eval "$(0-cd)"` | Alias | Review | Depends on 0-cd script (Keep) and `~/0` directory; useful if you use `~/0` |
+| `0=cd $HOME/0` | Alias | Remove | `~/0` is rwxrob's Zettelkasten pattern — not the user's workflow |
+| `zo=eval "$(0-cd)"` | Alias | Remove | Depends on 0-cd script (Remove); remove with it |
 | `lab=cd $LAB` | Alias | Remove | `$LAB` undefined — silently fails |
 | `dot=cd $HOME/.local/share/chezmoi` | Alias | Keep | Generic, correct path |
 | `repos=cd $REPOS` | Alias | Keep | Generic |
@@ -150,8 +150,8 @@ Tools the user explicitly wants (D-14, D-15) plus tools referenced in zshrc/scri
 
 | Tool | Purpose | Install Method | Priority |
 |------|---------|----------------|----------|
-| Node | JavaScript runtime (user wants via setup.sh per D-14) | **Conflict:** already in `dot_config/mise/config.toml` as `node = "latest"`. User wants it in setup.sh instead. Flag for Phase 3 reconciliation: either remove from mise and add `npm install -g` step to setup, or keep in mise and document the choice. | High |
-| Claude Code CLI | AI coding assistant (`claude` command) | After Node is available: add `npm install -g @anthropic-ai/claude-code` to `setup` script (D-14) | High |
+| Node | JavaScript runtime | Already in `dot_config/mise/config.toml` as `node = "latest"` — stays there. No conflict. | High |
+| Claude Code CLI | AI coding assistant (`claude` command) | Phase 3 will install via mise (consistent with existing tool management pattern). Not via setup.sh. | High |
 | gh (GitHub CLI) | GitHub API, PRs, issues, releases from CLI | Add to mise: `gh = "latest"` in `dot_config/mise/config.toml` | Medium |
 | lazygit | TUI Git client (`lg` alias already in zshrc) | Add to mise: `lazygit = "latest"` in `dot_config/mise/config.toml` (D-15) | Medium |
 | direnv | Per-directory environment variables (hook already in zshrc) | Add to mise: `direnv = "latest"` in `dot_config/mise/config.toml` (D-15) | Medium |
@@ -175,14 +175,12 @@ Concrete, actionable improvements to make this a reliable DevPod base image (D-1
 
 4. **Remove the vivaldi browser detection block from dot_zshrc.** The `if command -v vivaldi > /dev/null; then export BROWSER="vivaldi"; fi` block is irrelevant in headless containers. The `BROWSER` env var is not needed for terminal-only workflows. Remove the block entirely.
 
-5. **Add Node and Claude Code CLI installation to setup.sh.** Per D-14: decide whether Node lives in mise (current state) or setup.sh (user's stated preference). If moving to setup.sh, add a `curl`-based Node install (e.g., via fnm or nvm) followed by `npm install -g @anthropic-ai/claude-code`. If keeping in mise, add only the Claude Code CLI step after mise activates.
+5. **Add gh, lazygit, direnv, delta to mise config.toml.** These tools are either explicitly wanted (D-15) or already hooked in zshrc (`direnv`, `lg` alias). Adding them to mise makes them available automatically in every container without extra setup steps.
 
-6. **Add gh, lazygit, direnv, delta to mise config.toml.** These tools are either explicitly wanted (D-15) or already hooked in zshrc (`direnv`, `lg` alias). Adding them to mise makes them available automatically in every container without extra setup steps.
+6. **Remove or gate Zettelkasten and personal path aliases.** The aliases `in`, `cdzk`, `icloud`, `lab`, and `cdblog` all reference paths/variables that don't exist in a fresh container. They silently fail on use. Remove them in Phase 2 cleanup.
 
-7. **Remove or gate Zettelkasten and personal path aliases.** The aliases `in`, `cdzk`, `icloud`, `lab`, and `cdblog` all reference paths/variables that don't exist in a fresh container. They silently fail on use. Remove them in Phase 2 cleanup.
+7. **Create a `.privaterc.example` template.** The zshrc sources `$HOME/.privaterc` at the bottom (for personal tokens, private paths, etc.) but this file is gitignored. New container users won't know it's expected. Add a `dot_privaterc.example` (chezmoi will ignore `.example` suffix by default) or document the expected structure in the README.
 
-8. **Create a `.privaterc.example` template.** The zshrc sources `$HOME/.privaterc` at the bottom (for personal tokens, private paths, etc.) but this file is gitignored. New container users won't know it's expected. Add a `dot_privaterc.example` (chezmoi will ignore `.example` suffix by default) or document the expected structure in the README.
+8. **Add Claude Code CLI via mise in Phase 3.** Node is confirmed to stay in `dot_config/mise/config.toml` as `node = "latest"`. Phase 3 will add `claude-code` or the equivalent mise plugin entry so the `claude` command is available in every container automatically.
 
-9. **Reconcile the Node install approach.** Node is currently in `dot_config/mise/config.toml` as `node = "latest"`, but the user wants it managed via setup.sh (D-14) to control the install location. Decide in Phase 3: keep in mise (simpler, container-compatible) or move to setup.sh with a dedicated Node version manager. Flag for the Phase 3 planner.
-
-10. **Consider gating desktop-only config directories in chezmoi.** The `alacritty/`, `hypr/`, and `waybar/` directories under `dot_config/` are managed by chezmoi but irrelevant in headless containers. Use chezmoi templates (`{{ if .is_container }}...{{ end }}`) to skip applying these directories when provisioning containers, keeping the container filesystem clean.
+9. **Consider gating desktop-only config directories in chezmoi.** The `alacritty/`, `hypr/`, and `waybar/` directories under `dot_config/` are managed by chezmoi but irrelevant in headless containers. Use chezmoi templates (`{{ if .is_container }}...{{ end }}`) to skip applying these directories when provisioning containers, keeping the container filesystem clean.
