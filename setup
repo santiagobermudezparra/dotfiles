@@ -4,12 +4,9 @@ set -euo pipefail
 
 XDG_CONFIG_HOME="$HOME/.config"
 
-# Only change default shell on host machines — skip in DevPod/Codespaces/devcontainers
-# where sudo or /etc/passwd may be unavailable
-if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
-  if command -v zsh >/dev/null; then
-    sudo chsh -s "$(command -v zsh)" "$USER"
-  fi
+
+if command -v zsh >/dev/null; then
+  sudo chsh -s "$(command -v zsh)" "$USER"
 fi
 
 if ! command -v chezmoi >/dev/null; then
