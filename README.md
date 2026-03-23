@@ -82,7 +82,7 @@ curl -fsSL https://raw.githubusercontent.com/santiagobermudezparra/dotfiles/main
 
 **What it does, in order:**
 
-1. Changes your default shell to zsh (skipped in DevPod/Codespaces — no `sudo chsh` in containers)
+1. Changes your default shell to zsh
 2. Installs chezmoi and applies these dotfiles
 3. Creates `~/.zsh/` and clones the [pure](https://github.com/sindresorhus/pure) prompt
 4. Clones alacritty themes (only if alacritty is installed)
@@ -147,10 +147,12 @@ ralph --tool claude
 
 Ralph will:
 1. Read `prd.json` to find the next incomplete story
-2. Spawn a fresh Claude Code instance with `--dangerously-skip-permissions`
+2. Spawn a **fresh Claude Code subprocess** with `--no-session-persistence` for context isolation
 3. Claude implements the story, runs quality checks, commits
 4. Appends to `progress.txt`
 5. Repeats until all stories are done or max iterations (default: 10) is reached
+
+**Context isolation:** Each iteration is a completely fresh Claude Code process—no context carries over from previous iterations. This keeps token usage predictable and prevents stories from interfering with each other.
 
 **Important — where ralph looks for files:**
 

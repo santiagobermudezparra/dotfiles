@@ -87,14 +87,27 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   echo "  Ralph Iteration $i of $MAX_ITERATIONS ($TOOL)"
   echo "==============================================================="
 
-  # Run the selected tool with the ralph prompt
+  # Create a temporary file to capture output from the fresh subprocess
+  TEMP_OUTPUT=$(mktemp)
+  trap "rm -f $TEMP_OUTPUT" EXIT
+
+  # Run the selected tool in a fresh subprocess with --no-session-persistence
+  # This ensures each iteration spawns a completely new Claude Code process with clean context
   if [[ "$TOOL" == "amp" ]]; then
-    OUTPUT=$(cat "$SCRIPT_DIR/prompt.md" | amp --dangerously-allow-all 2>&1 | tee /dev/stderr) || true
+    cat "$SCRIPT_DIR/prompt.md" | amp --dangerously-allow-all 2>&1 | tee "$TEMP_OUTPUT"
   else
-    # Claude Code: use --dangerously-skip-permissions for autonomous operation, --print for output
-    OUTPUT=$(claude --dangerously-skip-permissions --print < "$SCRIPT_DIR/CLAUDE.md" 2>&1 | tee /dev/stderr) || true
+    # Claude Code: Use --no-session-persistence to prevent context carryover between iterations
+    # --print for non-interactive output, fresh subprocess each iteration
+    claude \
+      --dangerously-skip-permissions \
+      --print \
+      --no-session-persistence \
+      < "$SCRIPT_DIR/CLAUDE.md" 2>&1 | tee "$TEMP_OUTPUT"
   fi
-  
+
+  # Capture output for completion check
+  OUTPUT=$(cat "$TEMP_OUTPUT")
+
   # Check for completion signal
   if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
     echo ""
@@ -102,7 +115,7 @@ for i in $(seq 1 $MAX_ITERATIONS); do
     echo "Completed at iteration $i of $MAX_ITERATIONS"
     exit 0
   fi
-  
+
   echo "Iteration $i complete. Continuing..."
   sleep 2
 done
