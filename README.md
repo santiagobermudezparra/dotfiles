@@ -113,84 +113,56 @@ Or from the DevPod UI, point it at any Git repo. The container runs the setup sc
 
 ## Ralph — Autonomous AI Development Loop
 
-[Ralph](https://github.com/snarktank/ralph) is an autonomous AI development loop. You give it a PRD (Product Requirements Document) with user stories, and it implements them one at a time using Claude Code until all work is complete.
+[Ralph](https://github.com/snarktank/ralph) is an autonomous AI development loop for multi-story feature development. You provide a PRD (Product Requirements Document) with user stories, and Ralph implements them one at a time using Claude Code until all work is complete.
 
-**How it works:** Ralph spawns a fresh Claude Code instance for each story, ensuring clean context and preventing earlier work from influencing later stories. Knowledge persists through git history, `progress.txt`, and structured learnings.
+Ralph achieves context isolation by spawning a fresh Claude Code process for each story (preventing earlier work from biasing later work) and persisting knowledge through git commits, progress.txt learnings, and CLAUDE.md instructions.
 
-### Setup in These Dotfiles
+**Setup in these dotfiles:**
+- `scripts/ralph` — main loop script, available as `ralph` command
+- `dot_claude/CLAUDE.md` → `~/.claude/CLAUDE.md` — agent instructions
+- `dot_claude/skills/ralph/SKILL.md` and `dot_claude/skills/prd/SKILL.md` — helper skills
 
-Ralph is pre-configured and ready to use:
+### Quick Start (4 Steps)
 
-- `scripts/ralph` — the main loop script, available as `ralph` anywhere in your shell
-- `dot_claude/CLAUDE.md` → `~/.claude/CLAUDE.md` — agent instructions Ralph reads each iteration
-- `dot_claude/skills/ralph/SKILL.md` → `~/.claude/skills/ralph/SKILL.md` — skill for converting PRDs to `prd.json`
-- `dot_claude/skills/prd/SKILL.md` → `~/.claude/skills/prd/SKILL.md` — skill for generating PRDs
-
-### Step-by-Step: Using Ralph in a Project
-
-#### Step 1: Create a PRD (Product Requirements Document)
-
-In your project directory, start a Claude Code session and generate a PRD:
+**Step 1: Create a PRD**
 
 ```bash
 claude code
+# Inside Claude Code:
+/prd Build a CLI tool that fetches weather data
 ```
 
-Once in Claude Code, ask it to generate a PRD:
+This creates `PRD.md` with structured user stories.
 
-```
-/prd Build a CLI tool that fetches and displays weather data
-```
-
-This creates `PRD.md` in your project with structured user stories.
-
-#### Step 2: Convert PRD to prd.json
-
-Convert your markdown PRD into the JSON format Ralph reads:
+**Step 2: Convert to prd.json**
 
 ```bash
-claude code --print --dangerously-skip-permissions < ~/.local/share/chezmoi/scripts/CLAUDE.md
-# Or simpler: use the /ralph skill if you have it loaded
 /ralph
 ```
 
-This creates `prd.json` with structured stories including:
-- Story ID, title, and description
-- Priority level
-- Branch name for the feature
-- Initial `passes: false` for all stories
+Creates `prd.json` with stories (each marked `passes: false` initially).
 
-#### Step 3: Initialize Progress Files
-
-In your project root, create the progress tracking file:
+**Step 3: Initialize progress file**
 
 ```bash
 touch progress.txt
 ```
 
-Ralph will use this to track learnings across iterations.
+Ralph uses this to accumulate learnings across iterations.
 
-#### Step 4: Run Ralph
-
-Start the autonomous loop:
+**Step 4: Run Ralph**
 
 ```bash
 ralph --tool claude
 ```
 
-**What Ralph does each iteration:**
-
-1. **Reads prd.json** to find the highest-priority story where `passes: false`
-2. **Spawns fresh Claude Code subprocess** with clean context (no history from previous stories)
-3. **Claude implements** that single story:
-   - Checks out the feature branch
-   - Writes code following quality standards
-   - Runs typecheck, lint, and tests
-   - Commits changes with proper message format
-4. **Appends progress** — documents what was built and learnings for future iterations
-5. **Updates prd.json** — marks the story as `passes: true`
-6. **Repeats** — spawns next iteration for the next story
-7. **Stops** — when all stories are complete or max iterations reached
+Ralph spawns a fresh Claude instance for each story. Each iteration:
+1. Reads prd.json to find next incomplete story
+2. Spawns fresh Claude subprocess with clean context
+3. Claude implements the story (checks out branch, writes code, runs checks, commits)
+4. Appends learnings to progress.txt
+5. Marks story as `passes: true`
+6. Repeats until all stories complete
 
 **Output example:**
 
@@ -198,114 +170,60 @@ ralph --tool claude
 ===============================================================
   Ralph Iteration 1 of 10 (claude)
 ===============================================================
-[Claude implements story STORY-1]
-[Commits, runs checks, appends to progress.txt]
+[Claude implements STORY-1, commits, appends to progress.txt]
 Iteration 1 complete. Continuing...
 
 ===============================================================
   Ralph Iteration 2 of 10 (claude)
 ===============================================================
-[Fresh Claude instance, clean context]
-[Claude implements story STORY-2]
+[Fresh Claude instance. Reads progress.txt. Implements STORY-2]
 Iteration 2 complete. Continuing...
 
-[...]
-
 Ralph completed all tasks!
-Completed at iteration 3 of 10
 ```
-
-### Understanding Progress.txt and Codebase Patterns
-
-Ralph learns across iterations through **progress.txt**. Each iteration appends a section like:
-
-```
-## 2026-03-24 - STORY-1
-
-**Implemented:**
-- Added authentication middleware
-- JWT token validation on protected routes
-
-**Files Changed:**
-- `src/auth/middleware.ts`
-- `tests/auth/middleware.test.ts`
-
-**Learnings for Future Iterations:**
-- Pattern: Always use `IF NOT EXISTS` for database migrations
-- Gotcha: JWT header must be `Authorization: Bearer <token>` format
-- Useful context: JWT secrets are in `process.env.JWT_SECRET`, never hardcode
-
----
-```
-
-At the **start of progress.txt**, a `## Codebase Patterns` section consolidates the most important reusable patterns:
-
-```
-## Codebase Patterns
-
-- When modifying the API schema, update TypeScript types in `types.ts` to stay in sync
-- Use `sql<number>` template syntax for all SQL aggregations
-- Always use `IF NOT EXISTS` for database migrations
-- Export types from `actions.ts` for UI components that need them
-- The evaluation panel is in `src/components/EvaluationPanel.tsx`
-
----
-```
-
-**This is how Ralph preserves knowledge** — each iteration reads these patterns and understands the codebase conventions without re-learning them.
 
 ### Command Reference
 
 ```bash
-# Run Ralph with Claude Code (recommended, default 10 iterations)
-ralph --tool claude
-
-# Run Ralph with up to 20 iterations
-ralph --tool claude 20
-
-# Use Amp instead (original tool, less recommended)
-ralph --tool amp
-
-# Check progress
-cat progress.txt
-
-# View story completion status
-cat prd.json | jq '.userStories[] | {id, title, passes}'
-
-# View commit history
-git log --oneline -10
+ralph --tool claude          # Run with Claude Code (default 10 iterations)
+ralph --tool claude 20       # Run with 20 iterations
+ralph --tool amp             # Use Amp instead
+cat progress.txt             # Check learnings accumulated
+cat prd.json | jq '.userStories[] | {id, title, passes}'  # Story status
 ```
 
-### Important Notes
+### How Ralph Learns: Progress.txt & Codebase Patterns
 
-**Where Ralph Looks for Files:**
+Ralph learns across iterations through **progress.txt**. At the start is a `## Codebase Patterns` section consolidating reusable conventions:
 
-Ralph resolves files relative to `~/.local/share/chezmoi/scripts/` (the chezmoi scripts directory), NOT your project root. To use Ralph per-project:
+```
+## Codebase Patterns
+
+- When modifying API schema, update TypeScript types in types.ts to stay in sync
+- Always use IF NOT EXISTS for database migrations
+- Tests require NODE_ENV=test and dev server on PORT=3000
+- The eval panel is in src/components/EvaluationPanel.tsx
+```
+
+Each iteration appends detailed learnings. Future Claude instances read these patterns first, so they understand conventions without re-learning them.
+
+**Quality Assurance:** Ralph enforces quality checks before every commit. If typecheck, lint, or tests fail, Claude must fix issues before committing.
+
+**File Resolution:** Ralph looks for prd.json and progress.txt in the directory where you run `ralph`. To use per-project:
 
 ```bash
-# In your project root, copy these files
-cp ~/.local/share/chezmoi/scripts/prd.json . 2>/dev/null || echo '{
-  "title": "My Project",
-  "branchName": "ralph/feature-branch",
-  "userStories": []
-}' > prd.json
-
+cp ~/.local/share/chezmoi/scripts/prd.json .
 touch progress.txt
+ralph --tool claude  # Reads local files
 ```
 
-Now when you run `ralph --tool claude` from your project root, it will read these local files.
+### How it Works: Context Isolation & Knowledge Persistence
 
-**Quality Checks:**
+For detailed explanations of context isolation, knowledge persistence mechanisms, and codebase pattern guidance, see:
 
-Ralph enforces quality before every commit. If typecheck, lint, or tests fail, Claude cannot commit and must fix the issues. This prevents broken code from accumulating across iterations.
-
-**Context Isolation:**
-
-Each iteration is a **completely fresh Claude Code process** with no memory of previous iterations. This keeps token usage predictable and prevents stories from interfering with each other. Knowledge persists only through git commits and progress.txt.
-
-**Stop Condition:**
-
-Ralph exits automatically when all stories in `prd.json` have `passes: true`, or when it reaches max iterations.
+- **[scripts/RALPH.md](scripts/RALPH.md)** — Complete technical guide (context rooting problem, three-layer persistence model, pattern extraction criteria, verification steps)
+- **[scripts/RALPH-ARCHITECTURE.md](scripts/RALPH-ARCHITECTURE.md)** — Industry patterns and architecture (sub-agent spawning, progressive disclosure, lab notebook pattern, state transitions)
+- **[dot_claude/CLAUDE.md](dot_claude/CLAUDE.md)** — Agent instructions and step-by-step workflow
 
 ---
 
