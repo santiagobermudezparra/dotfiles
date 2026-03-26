@@ -15,6 +15,25 @@
 
 </details>
 
+## Upcoming Phases (v2.0+)
+
+### Phase 4: README Review & Ralph Documentation Audit
+- Verify README.md accurately documents Ralph's context isolation approach
+- Audit implementation against documentation
+- Research best practices for Ralph pattern documentation
+- Update README with context rooting explanations and deployment examples
+- **Branch:** `phase/4-readme-review` → PR to main
+- **Models:** Haiku 4.5 (discuss/plan), Sonnet 4.6 (execute)
+
+### Phase 5: Neovim Setup for Work Mac
+- Create portable neovim setup from dotfiles for macOS work environments
+- Add Salesforce DX/CLI integration
+- Include Node.js and Python stacks
+- Support both Mac and Linux via dotfiles manager (non-DevPod)
+- Create new repository: `dotfiles-work-mac`
+- **Branch:** `phase/5-neovim-salesforce` → PR to main (this repo), plus new repo setup
+- **Models:** Haiku 4.5 (discuss/plan), Sonnet 4.6 (execute)
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -22,3 +41,5 @@
 | 1. Audit | v1.0 | 1/1 | Complete | 2026-03-21 |
 | 2. Cleanup | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 3. Ralph Integration | v1.0 | 2/2 | Complete | 2026-03-22 |
+| 4. README Review | v2.0 | 0/? | Pending | — |
+| 5. Work Mac Setup | v2.0 | 0/? | Pending | — |
