@@ -2,12 +2,18 @@
 
 You are an autonomous coding agent working on a software project. Ralph runs you repeatedly—once per user story—until all work is complete. Each iteration is a fresh instance with clean context.
 
+## CRITICAL: Knowledge Persistence Mechanism
+
+This file drives knowledge persistence across iterations. **Step 4 (Read progress notes) is ESSENTIAL for knowledge transfer.** If removed or reordered, Claude will stop learning from prior iterations, and persistence breaks silently. The script will continue running, but each iteration starts completely blind.
+
+Do not modify the order of steps or remove Step 4 without understanding the consequences.
+
 ## Your Task (Per Iteration)
 
 1. **Read the PRD** — Open `prd.json` in the same directory as this file
 2. **Find incomplete work** — Locate the highest-priority story where `passes: false`
 3. **Check the branch** — Ensure you're on the correct branch from PRD `branchName`. Create it from main if needed.
-4. **Read progress notes** — Open `progress.txt` and read the `## Codebase Patterns` section at the top first (this is how you learn from prior iterations)
+4. **Read progress notes FIRST — this is how knowledge persists** — Open `progress.txt` immediately and read the `## Codebase Patterns` section at the top. This step teaches you the codebase conventions learned in prior iterations. Each iteration, the Codebase Patterns section grows. Skipping this step means you'll re-learn the same patterns over and over.
 5. **Implement ONE story** — Complete that single user story only
 6. **Run quality checks** — typecheck, lint, tests (whatever your project requires)
 7. **Update CLAUDE.md files** — If you discovered reusable patterns, add them to CLAUDE.md files in edited directories
@@ -16,6 +22,20 @@ You are an autonomous coding agent working on a software project. Ralph runs you
 10. **Append progress** — Add your learnings to `progress.txt` (see format below)
 11. **Check completion** — If ALL stories in prd.json have `passes: true`, reply with `<promise>COMPLETE</promise>`
 12. **Stop if incomplete** — If stories remain with `passes: false`, end normally. Ralph will spawn a fresh iteration.
+
+## Knowledge Flow (Each Iteration)
+
+Here's how knowledge persists across iterations:
+
+1. Fresh Claude spawned with clean context (no memory of previous stories)
+2. Claude reads CLAUDE.md (this file) — learns role and task structure
+3. Claude reads prd.json — finds the current story to implement
+4. Claude reads progress.txt and the **Codebase Patterns section** — understands conventions and gotchas
+5. Claude implements story, appending learnings to progress.txt
+6. Next iteration: Fresh Claude repeats steps 1-5 (progress.txt has MORE patterns accumulated)
+
+**If Step 4 is removed:** Fresh Claude reads CLAUDE.md and prd.json, but skips progress.txt.
+Result: Each iteration starts completely blind, re-learning the same patterns repeatedly. The script keeps running but knowledge transfer stops.
 
 ## Progress Report Format
 
@@ -78,18 +98,25 @@ At the **START of progress.txt**, maintain a `## Codebase Patterns` section. Thi
 ```
 
 **Only add patterns that are:**
-- General and reusable (not story-specific implementation details)
-- Non-obvious gotchas or conventions that future iterations should know
-- Applicable across multiple areas of the codebase
+- General and reusable (applicable to future stories, not just this one)
+- Non-obvious gotchas or conventions that future iterations MUST know
+- Applicable across multiple areas of the codebase (not one-off edge cases)
+- Validated by experience (you observed the pattern in at least 2 stories, or it's core to the codebase)
 
 **Do NOT add:**
-- Story-specific details (those go in the iteration section)
-- Temporary debugging notes
-- Information already in CLAUDE.md files
+- Story-specific implementation details (e.g., "In Story 2 we added X" — that goes in the iteration section)
+- Temporary debugging notes or workarounds (remove before merging)
+- Information already in CLAUDE.md files (link to those files instead of duplicating)
+- Third-party documentation (link to docs instead of copying)
+- Patterns from only ONE story (need multiple observations to confirm a pattern)
 
-## Update CLAUDE.md Files in Directories
+**When in doubt, ask:** "Will future Claude benefit from knowing this?" If yes, it's a pattern. If it's specific to current story, it goes in the iteration section below.
 
-When you modify files in a directory, check if there's a CLAUDE.md file there or in parent directories. Add discoverable knowledge to the nearest CLAUDE.md:
+## Update CLAUDE.md Files in Directories (Critical for Discoverability)
+
+When you modify files in a directory, check if there's a CLAUDE.md file there or in parent directories. If it exists, add discoverable knowledge to it. If not, consider creating one.
+
+**Why this matters:** Future Claude instances and humans will read CLAUDE.md files when working in those directories. This is how module-specific knowledge becomes discoverable without forcing everyone to read all progress.txt files. CLAUDE.md co-located with code enables self-service discovery.
 
 **Examples of good additions:**
 - "When modifying X, also update Y to keep them in sync"
@@ -101,7 +128,19 @@ When you modify files in a directory, check if there's a CLAUDE.md file there or
 **Do NOT add:**
 - Story-specific implementation details
 - Temporary debugging notes
-- Information already in progress.txt
+- Information already in progress.txt (but it's OK to reference progress.txt patterns)
+
+## BEFORE YOU FINISH AN ITERATION — Validation Checklist
+
+- [ ] prd.json updated: story marked as `passes: true`
+- [ ] progress.txt appended: new iteration section with Implemented, Files Changed, Learnings
+- [ ] Codebase Patterns section updated: consolidated with new patterns (remove duplicates)
+- [ ] CLAUDE.md files updated: if you modified files in directories with CLAUDE.md, did you update them?
+- [ ] Commit message uses format: `feat: [Story ID] - [Story Title]`
+- [ ] All quality checks passed: typecheck, lint, tests
+- [ ] Final check: If all prd.json stories are now `passes: true`, output `<promise>COMPLETE</promise>`
+
+If ALL items are complete, you can proceed. **If Step 4 (progress.txt reading) is skipped, persistence breaks silently.**
 
 ## Quality Requirements
 
