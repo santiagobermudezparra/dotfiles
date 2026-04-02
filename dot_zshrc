@@ -158,6 +158,7 @@ alias hl='homelab'
 alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
 
 alias t='tmux'
+alias zo='eval "$($SCRIPTS/0-cd)"'
 alias e='exit'
 
 alias syu='sudo pacman -Syu'
