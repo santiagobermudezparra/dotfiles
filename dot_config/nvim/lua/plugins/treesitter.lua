@@ -2,10 +2,6 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- Pin to last stable tag that uses gcc compilation.
-		-- HEAD switched to tree-sitter CLI which requires GLIBC 2.39 (Ubuntu 22.04 has 2.35).
-		tag = "v0.10.0",
-		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
 				"bash",
