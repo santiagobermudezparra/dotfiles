@@ -47,14 +47,6 @@ export GOPRIVATE="github.com/$GITUSER/*,gitlab.com/$GITUSER/*"
 export GOPATH="$HOME/go/"
 
 
-# ~~~~~~~~~~~~~~~ Mise ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-if command -v mise > /dev/null ; then
-  eval "$($HOME/.local/bin/mise activate zsh)"
-fi
-
-
 # ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -78,6 +70,14 @@ typeset -U path
 path=($^path(N-/))
 
 export PATH
+
+
+# ~~~~~~~~~~~~~~~ Mise ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+if [ -x "$HOME/.local/bin/mise" ]; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
 
 
 # ~~~~~~~~~~~~~~~ Dev Container Specifics ~~~~~~~~~~~~~~~~~~~~~~~~
