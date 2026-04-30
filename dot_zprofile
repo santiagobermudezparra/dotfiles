@@ -7,3 +7,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 export XDG_CONFIG_HOME="$HOME"/.config
+
+# On Linux, SSH and other login shells read .zprofile but not .zshrc.
+# Source .zshrc so the prompt, aliases, and tools always load.
+# typeset -U path in .zshrc deduplicates PATH if this runs twice.
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  [[ -f ~/.zshrc ]] && source ~/.zshrc
+fi

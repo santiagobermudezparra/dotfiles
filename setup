@@ -4,6 +4,25 @@ set -euo pipefail
 
 XDG_CONFIG_HOME="$HOME/.config"
 
+# Ensure curl and git are available (required for chezmoi bootstrap and pure clone)
+if command -v apt-get >/dev/null; then
+  missing=()
+  command -v curl >/dev/null || missing+=(curl)
+  command -v git >/dev/null  || missing+=(git)
+  [[ ${#missing[@]} -gt 0 ]] && sudo apt-get install -y "${missing[@]}"
+fi
+
+# Install zsh if not present (required for everything else)
+if ! command -v zsh >/dev/null; then
+  if command -v apt-get >/dev/null; then
+    sudo apt-get install -y zsh
+  elif command -v brew >/dev/null; then
+    brew install zsh
+  else
+    echo "ERROR: zsh not found and no known package manager to install it" >&2
+    exit 1
+  fi
+fi
 
 if command -v zsh >/dev/null; then
   sudo chsh -s "$(command -v zsh)" "$USER"
@@ -26,9 +45,9 @@ if command -v alacritty >/dev/null; then
   git clone https://github.com/alacritty/alacritty-theme "$XDG_CONFIG_HOME"/alacritty/themes
 fi
 
-# jq — required by ralph agent loop for parsing prd.json
+# jq — useful for JSON processing in scripts
 if ! command -v jq >/dev/null; then
-  apt-get install -y jq 2>/dev/null || brew install jq 2>/dev/null || echo "WARNING: jq not installed — ralph requires jq"
+  apt-get install -y jq 2>/dev/null || brew install jq 2>/dev/null || echo "WARNING: jq not installed"
 fi
 
 # Claude Code CLI — native installer places binary at ~/.local/bin/claude
