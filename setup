@@ -4,11 +4,12 @@ set -euo pipefail
 
 XDG_CONFIG_HOME="$HOME/.config"
 
-# Ensure curl and git are available (required for chezmoi bootstrap and pure clone)
+# Ensure curl, git, gcc are available (required for chezmoi bootstrap, pure clone, treesitter)
 if command -v apt-get >/dev/null; then
   missing=()
   command -v curl >/dev/null || missing+=(curl)
-  command -v git >/dev/null  || missing+=(git)
+  command -v git  >/dev/null || missing+=(git)
+  command -v gcc  >/dev/null || missing+=(gcc)
   [[ ${#missing[@]} -gt 0 ]] && sudo apt-get install -y "${missing[@]}"
 fi
 

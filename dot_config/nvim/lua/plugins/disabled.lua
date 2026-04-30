@@ -1,5 +1,5 @@
 return {
-  { "echasnovski/mini.pairs", enabled = false },
-  { "folke/noice.nvim", enabled = false },
-  { "rcarriga/nvim-notify", enabled = false },
+  { "nvim-mini/mini.pairs",  enabled = false }, -- renamed from echasnovski/mini.pairs
+  { "folke/noice.nvim",       enabled = false },
+  { "rcarriga/nvim-notify",   enabled = false },
 }

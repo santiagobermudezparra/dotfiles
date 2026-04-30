@@ -1,7 +1,7 @@
 return {
   -- Mason: auto-install LSP servers and formatters
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim", -- renamed from williamboman/mason.nvim
     opts = {
       ensure_installed = {
         "typescript-language-server", -- ts_ls (typescript.lua)
