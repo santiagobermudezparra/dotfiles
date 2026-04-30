@@ -2,6 +2,8 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		-- v0.9.3: last version using gcc; HEAD switched to tree-sitter CLI (needs GLIBC 2.39)
+		commit = "13be7a022997446bf96892bf1ac95784681a02e1",
 		opts = {
 			ensure_installed = {
 				"bash",
