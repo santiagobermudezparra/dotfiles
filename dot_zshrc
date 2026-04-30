@@ -102,9 +102,15 @@ setopt SHARE_HISTORY      # Share history between sessions
 
 # ~~~~~~~~~~~~~~~ Prompt ~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+# Pure — minimal async prompt, no wizard, works everywhere
 PURE_GIT_PULL=0
+PURE_ASYNC_WORK_IN_PROGRESS=1
 
+zstyle ':prompt:pure:prompt:success' color '#8ec07c'
+zstyle ':prompt:pure:prompt:error'   color '#fb4934'
+zstyle ':prompt:pure:git:branch'     color '#d79921'
+zstyle ':prompt:pure:path'           color '#83a598'
+zstyle ':prompt:pure:git:dirty'      color '#d65d0e'
 
 if [[ "$OSTYPE" == darwin* ]]; then
   fpath+=("$(brew --prefix)/share/zsh/site-functions")
