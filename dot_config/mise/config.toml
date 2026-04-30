@@ -7,8 +7,9 @@ lsd = "latest"
 bat = "latest"
 fzf = "latest"
 fd = "latest"
-node = "latest"
+node    = "latest"
 chezmoi = "latest"
-usage = "latest"   # for mise completion
+usage   = "latest"   # for mise completion
+java    = "temurin-21"  # required for Apex LSP
 
 # "ubi:fluxcd/flux2" = { version = "latest", exe = "flux" }
